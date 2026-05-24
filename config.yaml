@@ -1,0 +1,77 @@
+# Application Configuration
+
+app:
+  name: "AI-Driven Medical Literature Research Platform"
+  version: "1.0.0"
+  environment: "development"
+
+backend:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  reload: true
+
+database:
+  type: "sqlite"
+  path: "./data/medical_research.db"
+  echo: false
+
+api:
+  pubmed:
+    base_url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+    email: "researcher@example.com"
+    tool: "medical_literature_ai"
+    max_retries: 3
+    timeout: 30
+    rate_limit_delay: 0.5
+
+  semantic_scholar:
+    base_url: "https://api.semanticscholar.org/graph/v1"
+    timeout: 30
+    rate_limit_delay: 0.5
+
+gemini:
+  model: "gemini-1.5-flash"
+  temperature: 0.7
+  max_tokens: 2000
+  timeout: 60
+
+search:
+  default_years: 5
+  min_date: "2019-01-01"
+  supported_databases:
+    - pubmed
+    - semantic_scholar
+    - google_scholar
+
+extraction:
+  try_fulltext: true
+  fallback_to_abstract: true
+  pdf_timeout: 30
+  max_file_size_mb: 50
+  supported_formats:
+    - pdf
+    - html
+
+categorization:
+  enabled: true
+  categories:
+    - "Diagnosis/Classification"
+    - "Surgical Technique"
+    - "Outcome"
+
+appraisal:
+  framework: "GRADE"
+  calculate_risk_of_bias: true
+  traffic_light_plot: true
+
+logging:
+  level: "INFO"
+  format: "json"
+  file: "./logs/app.log"
+
+frontend:
+  port: 8501
+  theme: "light"
+  layout: "wide"
+  responsive: true
